@@ -1,0 +1,25 @@
+<div>
+    <?php
+    // En cas d'erreur
+    if (isset($erreurs) && !empty($erreurs) && is_array($erreurs))
+    {
+
+        echo '<div class="zone-erreur">';
+        echo '<h4>Erreurs</h4>';
+
+        foreach ($erreurs as $err)
+        {
+            echo "<p>" . htmlspecialchars($err) . "</p>";
+        }
+
+        echo '</div>';
+    }
+    // En cas de succes ou message d'info
+    else if (isset($info) && !empty($info))
+    {
+        echo '<div class="zone-info">';
+        echo "<p>". htmlspecialchars($info) ."</p>";
+        echo '</div>';
+    }
+    ?>
+</div>
