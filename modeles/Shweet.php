@@ -73,6 +73,9 @@ class Shweet
      */
     public function setTexte(string $texte): self
     {
+        $texte = trim($texte);
+        if (empty($texte) || strlen($texte) > 255)
+            throw new Exception("Le texte '$texte' doit être entre 1 et 255 caractères.");
         $this->texte = $texte;
         return $this;
     }
