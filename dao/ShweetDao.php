@@ -39,9 +39,9 @@ class ShweetDao extends BaseDao
 
         $requete = null;
 
-        if ($auteurId === 0)
+        if ($auteurId == 0)
         {
-            $requete = $connexion->prepare("SELECT * FROM shweet WHERE(parent_id IS NULL) ORDER BY date_creation DESC LIMIT :limite");
+            $requete = $connexion->prepare("SELECT * FROM shweet WHERE parent_id IS NULL ORDER BY date_creation DESC LIMIT 20");
             $requete->bindValue(":limite", $limite);
         }
         else

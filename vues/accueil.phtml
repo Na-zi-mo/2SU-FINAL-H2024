@@ -12,10 +12,30 @@
     <section id="contenu">
         <div class="container">
             <?php require_once 'section/retroaction.phtml'; ?>
-            <p>Page d'accueil...</p>
-            <p>Dans mon souvenir, je m'étais basé sur <a href="https://www.bootdey.com/snippets/view/profile-with-data-and-skills" target="_blank">ce template Bootstrap.</a></p>
-            <p>Une simple recherche Google pourrait aussi vous permettre de trouver d'autres templates gratuits : <a href="https://www.google.com/search?q=free+Bootstrap+templates" target="_blank">free Bootstrap templates</a> + mot_clef</p>
-            <p>L'utilisation de Bootstrap est facultative! Vous pouvez faire du "pur" html/css sans problème!</p>
+            <div class="post-accueil">
+                <div class="post-content">
+                    <?php foreach ($champs as $shweet) : ?>
+                        <div class="card">
+                            <div id="<?= $shweet->getId() ?>" class="post-container">
+                                <img src="<?= $shweet->getAuteur->getUrlAvatar() ?>" alt="N.D." class="profile-photo-md pull-left">
+                                <div class="post-detail">
+                                    <div class="user-info">
+                                        <h5>
+                                            <a class="profile-link" href="index.php?ctrl=default&action=afficherProfil&id=<?= $shweet->getAuteur()->getId() ?>"><?= $shweet->getAuteur()->getNomUtilisateur() ?></a>
+                                        </h5>
+                                        <p class="text-muted">Publié le <?= $shweet->getDateCreation()->format('Y-m-d') ?> à <?= $shweet->getDateCreation()->format('H:i:s') ?></p>
+                                    </div>
+                                    <div class="line-divider"></div>
+                                    <div class="post-text">
+                                        <p><?= htmlspecialchars($shweet->getTexte()) ?></p>
+                                    </div>
+                                    <div class="line-divider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
     </section>
 
