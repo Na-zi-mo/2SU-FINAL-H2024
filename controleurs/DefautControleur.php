@@ -42,8 +42,8 @@ class DefautControleur extends BaseControleur
     function lister(): void
     {
         $vue = new CreateurVue('vues/accueil.phtml');
-        // $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents());
-        $vue->assignerPlusieurs($this->shweetDao->selectDerniersShweetsParents());
+        $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents());
+        // $vue->assignerPlusieurs($this->shweetDao->selectDerniersShweetsParents());
         echo $vue->generer();
     }
 

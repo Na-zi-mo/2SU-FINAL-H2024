@@ -78,7 +78,7 @@ class UtilisateurDao extends BaseDao
             $enregistrement['hash'],
             $enregistrement['url_site'],
             $enregistrement['url_avatar'],
-            $enregistrement['date_creation'],
+            new DateTime($enregistrement['date_creation']),
             $enregistrement['id']
         );
     }

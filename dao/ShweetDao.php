@@ -42,25 +42,27 @@ class ShweetDao extends BaseDao
         if ($auteurId == 0)
         {
             $requete = $connexion->prepare("SELECT * FROM shweet WHERE parent_id IS NULL ORDER BY date_creation DESC LIMIT 20");
-            $requete->bindValue(":limite", $limite);
+            // $requete->bindValue(":limite", $limite);
+            $requete->execute();
         }
         else
         {
             $requete = $connexion->prepare("SELECT * FROM shweet WHERE( auteur_id=:auteur_id AND parent_id IS NULL) ORDER BY date_creation DESC LIMIT :limite");
             $requete->bindValue(":auteur_id", $auteurId);
             $requete->bindValue(":limite", $limite);
+            $requete->execute();
         }
 
-        $requete->execute();
+        // $requete->execute();
 
         $shweets = [];
         while ($enregistrement = $requete->fetch())
         {
             $shweet = $this->construireShweet($enregistrement);
             $shweet->setAuteur($this->utilisateurDao->select($shweet->getAuteurId()));
-            $shweet->setEnfants($this->loadEnfants($shweet->getParentId()));
+            $shweet->setEnfants($this->loadEnfants($shweet->getId()));
 
-            $shweets = $shweet;
+            $shweets[] = $shweet;
         }
         return $shweets;
     }
@@ -125,7 +127,7 @@ class ShweetDao extends BaseDao
             $shweet = $this->construireShweet($enregistrement);
             $shweet->setAuteur($this->utilisateurDao->select($shweet->getAuteurId()));
 
-            $shweetsEnfants = $shweet;
+            $shweetsEnfants[] = $shweet;
         }
         return $shweetsEnfants;
     }
@@ -136,9 +138,9 @@ class ShweetDao extends BaseDao
             $enregistrement['texte'],
             $enregistrement['auteur_id'],
             null,
-            $enregistrement['date_creation'],
+            new DateTime($enregistrement['date_creation']),
             $enregistrement['parent_id'],
-            null,
+            array(),
             $enregistrement['id']
         );
     }
