@@ -17,6 +17,7 @@ class Shweet
         ?Utilisateur $auteur,
         DateTime $dateCreation = null,
         ?int $parentId = null,
+        ?Shweet $parent = null,
         ?array $enfant = array(),
         int $id = 0
     )
@@ -27,7 +28,7 @@ class Shweet
         $this->setAuteur($auteur);
         $this->setDateCreation($dateCreation);
         $this->setParentId($parentId);
-        $this->setParent(null);
+        $this->setParent($parent);
         $this->setEnfants($enfant);
     }
 

@@ -140,6 +140,7 @@ class ShweetDao extends BaseDao
             null,
             new DateTime($enregistrement['date_creation']),
             $enregistrement['parent_id'],
+            null,
             array(),
             $enregistrement['id']
         );
