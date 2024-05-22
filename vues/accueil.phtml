@@ -17,7 +17,8 @@
                     <?php foreach ($shweets as $shweet) : ?>
                         <div class="card">
                             <div id="<?= $shweet->getId() ?>" class="post-container">
-                                <img src="<?= $shweet->getAuteur->getUrlAvatar() ?>" alt="N.D." class="profile-photo-md pull-left">
+                                <img src="<?= $shweet->getAuteur()->getUrlAvatar() ?>" alt="N.D." class="profile-photo-md pull-left">
+
                                 <div class="post-detail">
                                     <div class="user-info">
                                         <h5>
@@ -30,9 +31,19 @@
                                         <p><?= htmlspecialchars($shweet->getTexte()) ?></p>
                                     </div>
                                     <div class="line-divider"></div>
+                                    <?php foreach ($shweet->getEnfants() as $enfant) : ?>
+                                        <div id="<?= $enfant->getId() ?>" class="post-comment">
+                                            <img src="<?= $enfant->getAuteur()->getUrlAvatar() ?>" alt="N.D." class="profile-photo-sm">
+                                            <p>
+                                                <a href="index.php?ctrl=default&action=afficherProfil&id=<?= $enfant->getAuteur()->getId() ?>" class="profile-link"><?= $enfant->getAuteur()->getNomUtilisateur() ?></a>
+                                                <?= $enfant->getTexte() ?>
+                                            </p>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
+                        <br>
                     <?php endforeach; ?>
                 </div>
             </div>
