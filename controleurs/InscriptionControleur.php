@@ -19,33 +19,18 @@ class InscriptionControleur extends BaseControleur
         $this->utilisateurDao = new UtilisateurDao($configDao);
     }
 
-    // function consulter(): void
-    // {
-    // }
-
-    function afficherProfil(): void
+    function consulter(): void
     {
-        $vue = new CreateurVue('vues/profil.phtml');
-
-        if (is_numeric($_REQUEST['id']))
-        {
-            $id = $_REQUEST['id'];
-            $utilisateur = $this->utilisateurDao->select($id);
-            $vue->assigner('utilisateur', $utilisateur);
-            $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($utilisateur->getId()));
-        }
+        $vue = new CreateurVue('vues/inscription.phtml');
         echo $vue->generer();
     }
 
-    function lister(): void
+    function creerProfil(): void
     {
-        $vue = new CreateurVue('vues/accueil.phtml');
-        $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents());
-        echo $vue->generer();
     }
 
     function defaut(): void
     {
-        $this->lister();
+        $this->consulter();
     }
 }

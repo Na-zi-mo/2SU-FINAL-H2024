@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+    <?php require_once 'section/head.phtml' ?>
+    <title>Shwitter</title>
+</head>
+
+<body>
+    <section id="contenu">
+        <?php require_once 'section/entete.phtml'; ?>
+        <main class="form-inscription">
+            <div>
+            </div>
+            <form id="formulaire-inscription" method="post" action="index.php">
+                <h1 class="h3 mb-3 fw-normal">Inscription</h1>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="nom-utilisateur-id" name="nom-utilisateur" placeholder="" value="<?= $nomUtilisateur ?>">
+                    <label for="nom-utilisateur-id">Nom d'utilisateur</label>
+                </div>
+
+                <div>
+                    <p id="erreur-nom-utilisateur" class="erreur"><?= $erreurs['nomUtilisateur'] ?></p>
+                </div>
+
+                <hr />
+
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="mot-de-passe-id" name="mot-de-passe" placeholder="" value="<?= $motDePasse ?>">
+                    <label for="mot-de-passe-id">Mot de passe</label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="confirmation-mot-de-passe-id" name="confirmation-mot-de-passe" placeholder="" value="<?= $confirmationMotDePasse ?>">
+                    <label for="confirmation-mot-de-passe-id">Confirmation du mot de passe</label>
+                </div>
+
+                <div>
+                    <p id="erreur-mot-de-passe" class="erreur"><?= $erreurs['motDePasse'] ?></p>
+                </div>
+
+                <hr />
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="bio-id" name="bio" placeholder="" value="<?= $bio ?>">
+                    <label for="bio-id">Bio</label>
+                </div>
+
+                <div>
+                    <p id="erreur-bio" class="erreur"><?= $erreurs['bio'] ?></p>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="localisation-id" name="localisation" placeholder="" value="<?= $localisation ?>">
+                    <label for="localisation-id">Localisation</label>
+                </div>
+
+                <div>
+                    <p id="erreur-localisation" class="erreur"><?= $erreurs['localisation'] ?></p>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="url-site-id" name="url-site" placeholder="" value="<?= $urlSite ?>">
+                    <label for="url-site-id">Url de votre site</label>
+                </div>
+
+                <div>
+                    <p id="erreur-url-site" class="erreur"><?= $erreurs['urlSite'] ?></p>
+                </div>
+
+                <hr />
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="url-avatar-id" name="url-avatar" placeholder="" value="<?= $urlAvatar ?>">
+                    <label for="url-avatar-id">Url de votre avatar</label>
+                </div>
+
+                <div>
+                    <p id="erreur-url-avatar" class="erreur"><?= $erreurs['urlAvatar'] ?></p>
+                </div>
+
+                <hr />
+
+                <input type="hidden" name="ctrl" value="inscription">
+                <input type="hidden" name="action" value="creerProfil">
+                <button class="w-100 btn btn-lg btn-primary" type="submit">S'inscrire</button>
+            </form>
+        </main>
+    </section>
+
+    <?php require_once 'section/pied.phtml'; ?>
+</body>
+
+</html>
