@@ -26,7 +26,7 @@ class ShweetDao extends BaseDao
 
             if (is_null($shweet->getParentId()))
             {
-                $shweet->setEnfants($this->loadEnfants($shweet->getParentId()));
+                $shweet->setEnfants($this->loadEnfants($shweet->getId()));
             }
         }
         return $shweet;
@@ -100,8 +100,19 @@ class ShweetDao extends BaseDao
         {
             $connexion->beginTransaction();
 
-            $requete = $connexion->prepare("DELETE FROM shweet WHERE id=:id");
-            $requete->bindValue(":id", $id);
+            $shweet = $this->select($id);
+
+            $requete = null;
+
+
+
+            if (is_null($shweet->getParentId()))
+            {
+                $requete = $connexion->prepare("DELETE FROM shweet WHERE parent_id=$id");
+                $requete->execute();
+            }
+
+            $requete = $connexion->prepare("DELETE FROM shweet WHERE id=$id");
             $requete->execute();
 
             $connexion->commit();

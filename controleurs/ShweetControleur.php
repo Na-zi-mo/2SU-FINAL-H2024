@@ -57,6 +57,40 @@ class ShweetControleur extends BaseControleur
         echo $vue->generer();
     }
 
+    function supprimer(): void
+    {
+        $utilisateurConnecte = $this->getUtilisateurConnecte();
+        if (isset($_POST['shweet-id']) && isset($_POST['profil-origine-id']))
+        {
+            $idOrigine = $_POST['profil-origine-id'];
+            if ($idOrigine == $utilisateurConnecte->getId())
+            {
+                $this->shweetDao->delete($_POST['shweet-id']);
+
+                $vue = new CreateurVue('vues/profil.phtml');
+                $vue->assigner('utilisateur', $utilisateurConnecte);
+                $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($utilisateurConnecte->getId()));
+                echo $vue->generer();
+            }
+            else
+            {
+                $erreurs[] = "Il faut être auteur d'un shweet pour pouvoir le supprimer.";
+                $vue = new CreateurVue('vues/profil.phtml');
+                $vue->assigner('utilisateur', $utilisateurConnecte);
+                $vue->assigner('erreurs', $erreurs);
+                echo $vue->generer();
+            }
+        }
+        else
+        {
+            $erreurs[] = "Un shweet doit être choisi pour être supprimé.";
+            $vue = new CreateurVue('vues/profil.phtml');
+            $vue->assigner('utilisateur', $utilisateurConnecte);
+            $vue->assigner('erreurs', $erreurs);
+            echo $vue->generer();
+        }
+    }
+
     function defaut(): void
     {
         // $this->__construct($configDao);
