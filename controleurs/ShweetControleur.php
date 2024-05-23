@@ -22,6 +22,10 @@ class ShweetControleur extends BaseControleur
     // {
     // }
 
+    function shweetter(): void
+    {
+    }
+
     function lister(): void
     {
         $vue = new CreateurVue('vues/accueil.phtml');

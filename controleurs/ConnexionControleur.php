@@ -8,7 +8,7 @@ class ConnexionControleur extends BaseControleur
     function __construct(ConfigDao $configDao)
     {
         parent::__construct($configDao);
-        // $utilisateurConnecte = $this->getUtilisateurConnecte();
+        $utilisateurConnecte = $this->getUtilisateurConnecte();
         // // if (!isset($utilisateurConnecte))
         // // {
         // //     $vue = new CreateurVue('vues/interdit.phtml');
@@ -54,13 +54,13 @@ class ConnexionControleur extends BaseControleur
         }
     }
 
-    // function deconnecter(): void
-    // {
-    //     $this->detruireSession();
-    //     $vue = new CreateurVue('vues/connexion.phtml');
-    //     $vue->assigner('info', "Utilisateur déconnecté avec succès");
-    //     echo $vue->generer();
-    // }
+    function deconnecter(): void
+    {
+        $this->detruireSession();
+        $vue = new CreateurVue('vues/connexion.phtml');
+        $vue->assigner('info', "Utilisateur déconnecté avec succès");
+        echo $vue->generer();
+    }
 
     function defaut(): void
     {

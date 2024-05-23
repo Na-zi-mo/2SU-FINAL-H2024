@@ -10,10 +10,25 @@
                 -->
             </ul>
 
-            <div class="text-end">
-                <a href="index.php?ctrl=connexion" class="btn btn-outline-primary me-2">Connexion</a>
-                <a href="index.php?ctrl=inscription" class="btn btn-primary">S'inscrire</a>
-            </div>
+            <?php if (!isset($utilisateurConnecte)) : ?>
+                <div class="text-end">
+                    <a href="index.php?ctrl=connexion" class="btn btn-outline-primary me-2">Connexion</a>
+                    <a href="index.php?ctrl=inscription" class="btn btn-primary">S'inscrire</a>
+                </div>
+            <?php else : ?>
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="<?= $utilisateurConnecte->getUrlAvatar() ?>" alt="Photo profil" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="index.php?ctrl=defaut&action=afficherProfil&id=<?= $utilisateurConnecte->getId() ?>">Mon profil</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="index.php?ctrl=connexion&action=deconnecter">Se déconnecter</a></li>
+                    </ul>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </header>
