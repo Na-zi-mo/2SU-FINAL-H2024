@@ -3,20 +3,11 @@
 class InscriptionControleur extends BaseControleur
 {
     private UtilisateurDao $utilisateurDao;
-    private ShweetDao $shweetDao;
 
     function __construct(ConfigDao $configDao)
     {
         parent::__construct($configDao);
-        $utilisateurConnecte = $this->getUtilisateurConnecte();
-        // if (!isset($utilisateurConnecte))
-        // {
-        //     $vue = new CreateurVue('vues/interdit.phtml');
-        //     echo $vue->generer();
-        //     exit();
-        // }
         $this->utilisateurDao = new UtilisateurDao($configDao);
-        $this->shweetDao = new ShweetDao($configDao);
     }
 
     function consulter(): void
@@ -29,7 +20,7 @@ class InscriptionControleur extends BaseControleur
     {
         $vue = new CreateurVue('vues/inscription.phtml');
         $erreurs = array();
-        $infos = "";
+        $info = "";
 
         $nomUtilisateur = htmlspecialchars($_POST['nom-utilisateur']);
         $motDePasse = $_POST['mot-de-passe'];
@@ -103,6 +94,8 @@ class InscriptionControleur extends BaseControleur
             }
 
             $vue = new CreateurVue('vues/connexion.phtml');
+            $info = "Inscription réussie. Veuillez vous connecter.";
+            $vue->assigner('info', $info);
             echo $vue->generer();
         }
         else

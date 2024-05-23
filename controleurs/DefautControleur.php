@@ -8,13 +8,6 @@ class DefautControleur extends BaseControleur
     function __construct(ConfigDao $configDao)
     {
         parent::__construct($configDao);
-        $utilisateurConnecte = $this->getUtilisateurConnecte();
-        // if (!isset($utilisateurConnecte))
-        // {
-        //     $vue = new CreateurVue('vues/interdit.phtml');
-        //     echo $vue->generer();
-        //     exit();
-        // }
         $this->shweetDao = new ShweetDao($configDao);
         $this->utilisateurDao = new UtilisateurDao($configDao);
     }

@@ -7,13 +7,6 @@ class ShweetControleur extends BaseControleur
     function __construct(ConfigDao $configDao)
     {
         parent::__construct($configDao);
-        $utilisateurConnecte = $this->getUtilisateurConnecte();
-        // if (!isset($utilisateurConnecte))
-        // {
-        //     $vue = new CreateurVue('vues/interdit.phtml');
-        //     echo $vue->generer();
-        //     exit();
-        // }
         $this->shweetDao = new ShweetDao($configDao);
         $this->utilisateurDao = new UtilisateurDao($configDao);
     }
@@ -48,7 +41,6 @@ class ShweetControleur extends BaseControleur
     function lister(): void
     {
         $vue = new CreateurVue('vues/accueil.phtml');
-        // $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents());
         $vue->assignerPlusieurs($this->shweetDao->selectDerniersShweetsParents());
         echo $vue->generer();
     }
@@ -115,7 +107,6 @@ class ShweetControleur extends BaseControleur
         else
         {
             $erreurs[] = "Il faut être connecté pour commenter.";
-            // $vue = new CreateurVue('vues/accueil.phtml');
             $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents());
             $vue->assigner('erreurs', $erreurs);
             echo $vue->generer();
