@@ -38,6 +38,21 @@
                                                 <a href="index.php?ctrl=default&action=afficherProfil&id=<?= $enfant->getAuteur()->getId() ?>" class="profile-link"><?= $enfant->getAuteur()->getNomUtilisateur() ?></a>
                                                 <?= $enfant->getTexte() ?>
                                             </p>
+                                            <?php if (isset($utilisateurConnecte) && $utilisateurConnecte->getId() == $enfant->getAuteurId()) : ?>
+                                                <form method="post" action="index.php">
+                                                    <div class="dropdown">
+                                                        <button class="dropdown-toggle py-0 btn-menu" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            ...
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                            <li><input type="submit" class="btn btn-link" value="Supprimer"></li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="hidden" name="shweet-id" value="<?= $enfant->getId() ?>">
+                                                    <input type="hidden" name="ctrl" value="shweet">
+                                                    <input type="hidden" name="action" value="supprimer">
+                                                </form>
+                                            <?php endif; ?>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>

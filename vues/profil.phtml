@@ -82,7 +82,7 @@
                                                     <div class="line-divider"></div>
                                                     <div class="post-text">
                                                         <p><?= htmlspecialchars($shweet->getTexte()) ?></p>
-                                                        <?php if ($utilisateurConnecte->getId() === $shweet->getAuteurId()) : ?>
+                                                        <?php if (isset($utilisateurConnecte) && $utilisateurConnecte->getId() === $shweet->getAuteurId()) : ?>
                                                             <form method="post" action="index.php">
                                                                 <div class="dropdown">
                                                                     <button class="dropdown-toggle py-0 btn-menu" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -107,7 +107,7 @@
                                                                 <a href="index.php?ctrl=default&action=afficherProfil&id=<?= $enfant->getAuteur()->getId() ?>" class="profile-link"><?= $enfant->getAuteur()->getNomUtilisateur() ?></a>
                                                                 <?= $enfant->getTexte() ?>
                                                             </p>
-                                                            <?php if ($utilisateurConnecte->getId() === $enfant->getAuteurId()) : ?>
+                                                            <?php if (isset($utilisateurConnecte) && $utilisateurConnecte->getId() == $enfant->getAuteurId()) : ?>
                                                                 <form method="post" action="index.php">
                                                                     <div class="dropdown">
                                                                         <button class="dropdown-toggle py-0 btn-menu" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

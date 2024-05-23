@@ -60,34 +60,40 @@ class ShweetControleur extends BaseControleur
     function supprimer(): void
     {
         $utilisateurConnecte = $this->getUtilisateurConnecte();
-        if (isset($_POST['shweet-id']) && isset($_POST['profil-origine-id']))
+        if (isset($_POST['shweet-id']))
         {
-            $idOrigine = $_POST['profil-origine-id'];
-            if ($idOrigine == $utilisateurConnecte->getId())
+
+            $shweet = $this->shweetDao->select($_POST['shweet-id']);
+            if ($utilisateurConnecte->getId() == $shweet->getAuteurId())
             {
-
-
-                $vue = new CreateurVue('vues/profil.phtml');
-
-                $shweet = $this->shweetDao->select($_POST['shweet-id']);
-
-                $currentUser = null;
-                if (is_null($shweet->getParentId()))
+                if (isset($_POST['profil-origine-id']))
                 {
-                    $currentUser = $this->utilisateurDao->select($shweet->getAuteurId());
+                    $vue = new CreateurVue('vues/profil.phtml');
+
+                    $shweet = $this->shweetDao->select($_POST['shweet-id']);
+
+                    $currentUser = null;
+                    if (is_null($shweet->getParentId()))
+                    {
+                        $currentUser = $this->utilisateurDao->select($shweet->getAuteurId());
+                    }
+                    else
+                    {
+                        $currentUser = $this->utilisateurDao->select($shweet->getParentId()?->getAuteurId());
+                    }
+
+                    $this->shweetDao->delete($_POST['shweet-id']);
+                    $vue->assigner('utilisateur', $currentUser);
+                    $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($currentUser->getId()));
+                    echo $vue->generer();
                 }
                 else
                 {
-                    $currentUser = $this->utilisateurDao->select($shweet->getParentId()?->getAuteurId());
+                    $vue = new CreateurVue('vues/accueil.phtml');
+                    $this->shweetDao->delete($_POST['shweet-id']);
+                    $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents());
+                    echo $vue->generer();
                 }
-
-
-
-                $this->shweetDao->delete($_POST['shweet-id']);
-
-                $vue->assigner('utilisateur', $currentUser);
-                $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($currentUser->getId()));
-                echo $vue->generer();
             }
             else
             {
