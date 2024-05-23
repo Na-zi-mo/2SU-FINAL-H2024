@@ -53,8 +53,6 @@ class ShweetDao extends BaseDao
             $requete->execute();
         }
 
-        // $requete->execute();
-
         $shweets = [];
         while ($enregistrement = $requete->fetch())
         {
@@ -103,8 +101,6 @@ class ShweetDao extends BaseDao
             $shweet = $this->select($id);
 
             $requete = null;
-
-
 
             if (is_null($shweet->getParentId()))
             {
