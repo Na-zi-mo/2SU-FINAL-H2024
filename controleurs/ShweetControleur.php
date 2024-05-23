@@ -18,10 +18,6 @@ class ShweetControleur extends BaseControleur
         $this->utilisateurDao = new UtilisateurDao($configDao);
     }
 
-    // function consulter(): void
-    // {
-    // }
-
     function shweetter(): void
     {
         $utilisateurConnecte = $this->getUtilisateurConnecte();
@@ -198,6 +194,5 @@ class ShweetControleur extends BaseControleur
 
     function defaut(): void
     {
-        // $this->__construct($configDao);
     }
 }
