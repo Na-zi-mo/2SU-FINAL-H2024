@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+    <?php require_once 'section/head.phtml' ?>
+    <title>Shwitter</title>
+</head>
+
+<body>
+    <?php require_once 'section/entete.phtml'; ?>
+
+
+    <section id="contenu">
+        <div class="container">
+            <?php require_once 'section/retroaction.phtml'; ?>
+            <div class="row">
+                <div class="col-md-4 mb30">
+                    <div class="card">
+                        <div class="card-content pt20 pb20 profile-header">
+                            <img src="<?= $utilisateur->getUrlAvatar() ?>" alt="N.D." class="img-fluid rounded-circle">
+                            <h4 class="card-title text-center mb20"><?= $utilisateur->getNomUtilisateur() ?></h4>
+                            <p><?= $utilisateur->getBio() ?></p>
+                            <hr>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>LOCALISATION:</strong>
+                                        </td>
+                                        <td>
+                                            <p class="text-muted mb-0"><?= $utilisateur->getLocalisation() ?></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>A REJOINT LE:</strong>
+                                        </td>
+                                        <td>
+                                            <p class="text-muted mb-0"><?= $utilisateur->getDateCreation()->format('Y-m-d') ?></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 mb30">
+                    <div class="card">
+                        <div>
+                            <div class="post-content">
+                                <?php foreach ($shweets as $shweet) : ?>
+                                    <div class="card">
+                                        <div id="<?= $shweet->getId() ?>" class="post-container">
+                                            <img src="<?= $shweet->getAuteur()->getUrlAvatar() ?>" alt="N.D." class="profile-photo-md pull-left">
+
+                                            <div class="post-detail">
+                                                <div class="user-info">
+                                                    <h5>
+                                                        <a class="profile-link" href="index.php?ctrl=default&action=afficherProfil&id=<?= $shweet->getAuteur()->getId() ?>"><?= $shweet->getAuteur()->getNomUtilisateur() ?></a>
+                                                    </h5>
+                                                    <p class="text-muted">Publié le <?= $shweet->getDateCreation()->format('Y-m-d') ?> à <?= $shweet->getDateCreation()->format('H:i:s') ?></p>
+                                                </div>
+                                                <div class="line-divider"></div>
+                                                <div class="post-text">
+                                                    <p><?= htmlspecialchars($shweet->getTexte()) ?></p>
+                                                </div>
+                                                <div class="line-divider"></div>
+                                                <?php foreach ($shweet->getEnfants() as $enfant) : ?>
+                                                    <div id="<?= $enfant->getId() ?>" class="post-comment">
+                                                        <img src="<?= $enfant->getAuteur()->getUrlAvatar() ?>" alt="N.D." class="profile-photo-sm">
+                                                        <p>
+                                                            <a href="index.php?ctrl=default&action=afficherProfil&id=<?= $enfant->getAuteur()->getId() ?>" class="profile-link"><?= $enfant->getAuteur()->getNomUtilisateur() ?></a>
+                                                            <?= $enfant->getTexte() ?>
+                                                        </p>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php require_once 'section/pied.phtml'; ?>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+    <?php require_once 'section/head.phtml' ?>
+    <title>Shwitter</title>
+</head>
+
+<body>
+
+
+
+    <section id="contenu">
+        <?php require_once 'section/entete.phtml'; ?>
+        <main class="form-signin">
+            <?php require_once 'section/retroaction.phtml'; ?>
+            <form method="post" action="index.php">
+                <h1 class="h3 mb-3 fw-normal">Connexion</h1>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingInput" name="nom-utilisateur" placeholder="" value="<?= $nomUtilisateur ?>">
+                    <label for="floatingInput">Nom d'utilisateur</label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" name="mot-de-passe" placeholder="">
+                    <label for="floatingPassword">Mot de passe</label>
+                </div>
+
+                <input type="hidden" name="ctrl" value="connexion">
+                <input type="hidden" name="action" value="connecter">
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Se connecter</button>
+            </form>
+        </main>
+    </section>
+
+    <?php require_once 'section/pied.phtml'; ?>
+</body>
+
+</html>

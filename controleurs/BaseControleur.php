@@ -110,5 +110,5 @@ abstract class BaseControleur
     /**
      * Action par défaut du contrôleur.
      */
-    abstract function defaut() : void;
+    abstract function defaut(): void;
 }

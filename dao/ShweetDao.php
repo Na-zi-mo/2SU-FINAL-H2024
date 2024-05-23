@@ -33,23 +33,23 @@ class ShweetDao extends BaseDao
     }
 
 
-    public function selectDerniersShweetsParents(int $limite = 20, int $auteurId = 0): array
+    public function selectDerniersShweetsParents(int $auteurId = 0, int $limite = 20): array
     {
         $connexion = $this->getConnexion();
 
         $requete = null;
 
+        $limite = (int) $limite;
+
         if ($auteurId == 0)
         {
-            $requete = $connexion->prepare("SELECT * FROM shweet WHERE parent_id IS NULL ORDER BY date_creation DESC LIMIT 20");
-            // $requete->bindValue(":limite", $limite);
+            $requete = $connexion->prepare("SELECT * FROM shweet WHERE parent_id IS NULL ORDER BY date_creation DESC LIMIT $limite");
             $requete->execute();
         }
         else
         {
-            $requete = $connexion->prepare("SELECT * FROM shweet WHERE( auteur_id=:auteur_id AND parent_id IS NULL) ORDER BY date_creation DESC LIMIT :limite");
+            $requete = $connexion->prepare("SELECT * FROM shweet WHERE( auteur_id=:auteur_id AND parent_id IS NULL) ORDER BY date_creation DESC LIMIT $limite");
             $requete->bindValue(":auteur_id", $auteurId);
-            $requete->bindValue(":limite", $limite);
             $requete->execute();
         }
 
