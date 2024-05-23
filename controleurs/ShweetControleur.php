@@ -24,6 +24,29 @@ class ShweetControleur extends BaseControleur
 
     function shweetter(): void
     {
+        $utilisateurConnecte = $this->getUtilisateurConnecte();
+        if (isset($_POST['texte']) && !empty($_POST['texte']))
+        {
+            $texte = htmlspecialchars($_POST['texte']);
+
+            $newShweet = new Shweet($texte, $utilisateurConnecte->getId(), $utilisateurConnecte);
+
+            $this->shweetDao->insert($newShweet);
+
+            $vue = new CreateurVue('vues/profil.phtml');
+            $vue->assigner('utilisateur', $utilisateurConnecte);
+            $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($utilisateurConnecte->getId()));
+            echo $vue->generer();
+        }
+        else
+        {
+            $erreurs[] = "Un shweet doit posséder entre 1 et 255 caractères.";
+            $vue = new CreateurVue('vues/profil.phtml');
+            $vue->assigner('utilisateur', $utilisateurConnecte);
+            $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($utilisateurConnecte->getId()));
+            $vue->assigner('erreurs', $erreurs);
+            echo $vue->generer();
+        }
     }
 
     function lister(): void
@@ -36,6 +59,6 @@ class ShweetControleur extends BaseControleur
 
     function defaut(): void
     {
-        $this->lister();
+        // $this->__construct($configDao);
     }
 }

@@ -12,7 +12,7 @@
 
     <section id="contenu">
         <div class="container">
-            <?php require_once 'section/retroaction.phtml'; ?>
+
             <div class="row">
                 <div class="col-md-4 mb30">
                     <div class="card">
@@ -45,20 +45,22 @@
                     </div>
                 </div>
                 <div class="col-md-8 mb30">
-                    <form id="formulaire-shweetter" method="post" action="index.php">
-                        <div class="post-editor">
-                            <textarea name="texte" id="textarea-texte" class="post-field" placeholder="Écris un Shweet!" maxlength="255"></textarea>
-                            <div>
-                                <p id="erreur-texte" class="erreur"></p>
-                            </div>
+                    <?php if (isset($utilisateurConnecte) && ($utilisateurConnecte->getId() === $utilisateur->getId())) : ?>
+                        <form id="formulaire-shweetter" method="post" action="index.php">
+                            <div class="post-editor">
+                                <textarea name="texte" id="textarea-texte" class="post-field" placeholder="Écris un Shweet!" maxlength="255"></textarea>
+                                <div>
+                                    <p id="erreur-texte" class="erreur"><?php require_once 'section/retroaction.phtml'; ?></p>
+                                </div>
 
-                            <div class="d-flex">
-                                <input type="hidden" name="ctrl" value="shweet">
-                                <input type="hidden" name="action" value="shweetter">
-                                <button class="btn btn-success px-4 py-1">Shwitter!!!</button>
+                                <div class="d-flex">
+                                    <input type="hidden" name="ctrl" value="shweet">
+                                    <input type="hidden" name="action" value="shweetter">
+                                    <button class="btn btn-success px-4 py-1">Shwitter!!!</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    <?php endif; ?>
                     <div class="card">
                         <div>
                             <div class="post-content">
