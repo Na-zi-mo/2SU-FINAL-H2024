@@ -11,7 +11,6 @@
 
     <section id="contenu">
         <div class="container">
-            <?php require_once 'section/retroaction.phtml'; ?>
             <div class="post-accueil">
                 <div class="post-content">
                     <?php foreach ($shweets as $shweet) : ?>
@@ -29,6 +28,21 @@
                                     <div class="line-divider"></div>
                                     <div class="post-text">
                                         <p><?= htmlspecialchars($shweet->getTexte()) ?></p>
+                                        <?php if (isset($utilisateurConnecte) && $utilisateurConnecte->getId() === $shweet->getAuteurId()) : ?>
+                                            <form method="post" action="index.php">
+                                                <div class="dropdown">
+                                                    <button class="dropdown-toggle py-0 btn-menu" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        ...
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                        <li><input type="submit" class="btn btn-link" value="Supprimer"></li>
+                                                    </ul>
+                                                </div>
+                                                <input type="hidden" name="shweet-id" value="<?= $shweet->getId() ?>">
+                                                <input type="hidden" name="ctrl" value="shweet">
+                                                <input type="hidden" name="action" value="supprimer">
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="line-divider"></div>
                                     <?php foreach ($shweet->getEnfants() as $enfant) : ?>
@@ -55,6 +69,23 @@
                                             <?php endif; ?>
                                         </div>
                                     <?php endforeach; ?>
+                                    <?php if (isset($utilisateurConnecte)) : ?>
+                                        <form class="comment-form" method="post" action="index.php">
+                                            <div class="post-comment">
+                                                <img src="<?= $utilisateurConnecte->getUrlAvatar() ?>" alt="N.D." class="profile-photo-sm">
+
+                                                <input id="input-texte-33" type="text" class="form-control" name="texte" placeholder="Répondre..." maxlength="255">
+
+                                                <div>
+                                                    <p id="erreur-texte-33" class="erreur"><?php require_once 'section/retroaction.phtml'; ?></p>
+                                                </div>
+
+                                                <input type="hidden" name="parent-id" value="<?= $shweet->getId() ?>">
+                                                <input type="hidden" name="ctrl" value="shweet">
+                                                <input type="hidden" name="action" value="commenter">
+                                            </div>
+                                        </form>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
