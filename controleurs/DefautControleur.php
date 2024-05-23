@@ -2,22 +2,6 @@
 
 class DefautControleur extends BaseControleur
 {
-    // function __construct(ConfigDao $configDao)
-    // {
-    //     parent::__construct($configDao);
-    // }
-
-    // function accueil(array $erreurs = []): void
-    // {
-    //     $vue = new CreateurVue('vues/accueil.phtml');
-    //     echo $vue->generer();
-    // }
-
-    // function defaut(): void
-    // {
-    //     $this->accueil();
-    // }
-
     private ShweetDao $shweetDao;
     private UtilisateurDao $utilisateurDao;
 
@@ -34,10 +18,6 @@ class DefautControleur extends BaseControleur
         $this->shweetDao = new ShweetDao($configDao);
         $this->utilisateurDao = new UtilisateurDao($configDao);
     }
-
-    // function consulter(): void
-    // {
-    // }
 
     function afficherProfil(): void
     {
