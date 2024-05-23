@@ -65,11 +65,28 @@ class ShweetControleur extends BaseControleur
             $idOrigine = $_POST['profil-origine-id'];
             if ($idOrigine == $utilisateurConnecte->getId())
             {
-                $this->shweetDao->delete($_POST['shweet-id']);
+
 
                 $vue = new CreateurVue('vues/profil.phtml');
-                $vue->assigner('utilisateur', $utilisateurConnecte);
-                $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($utilisateurConnecte->getId()));
+
+                $shweet = $this->shweetDao->select($_POST['shweet-id']);
+
+                $currentUser = null;
+                if (is_null($shweet->getParentId()))
+                {
+                    $currentUser = $this->utilisateurDao->select($shweet->getAuteurId());
+                }
+                else
+                {
+                    $currentUser = $this->utilisateurDao->select($shweet->getParentId()?->getAuteurId());
+                }
+
+
+
+                $this->shweetDao->delete($_POST['shweet-id']);
+
+                $vue->assigner('utilisateur', $currentUser);
+                $vue->assigner('shweets', $this->shweetDao->selectDerniersShweetsParents($currentUser->getId()));
                 echo $vue->generer();
             }
             else
