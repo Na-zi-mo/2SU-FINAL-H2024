@@ -14,7 +14,7 @@
                 <h1 class="h3 mb-3 fw-normal">Inscription</h1>
 
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="nom-utilisateur-id" name="nom-utilisateur" placeholder="" value="<?= $nomUtilisateur ?>">
+                    <input type="text" class="form-control" id="nom-utilisateur-id" name="nom-utilisateur" placeholder="" value="<?= htmlspecialchars($nomUtilisateur) ?>">
                     <label for="nom-utilisateur-id">Nom d'utilisateur</label>
                 </div>
 
@@ -25,12 +25,12 @@
                 <hr />
 
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="mot-de-passe-id" name="mot-de-passe" placeholder="" value="<?= $motDePasse ?>">
+                    <input type="password" class="form-control" id="mot-de-passe-id" name="mot-de-passe" placeholder="" value="<?= htmlspecialchars($motDePasse) ?>">
                     <label for="mot-de-passe-id">Mot de passe</label>
                 </div>
 
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="confirmation-mot-de-passe-id" name="confirmation-mot-de-passe" placeholder="" value="<?= $confirmationMotDePasse ?>">
+                    <input type="password" class="form-control" id="confirmation-mot-de-passe-id" name="confirmation-mot-de-passe" placeholder="" value="<?= htmlspecialchars($confirmationMotDePasse) ?>">
                     <label for="confirmation-mot-de-passe-id">Confirmation du mot de passe</label>
                 </div>
 
@@ -41,7 +41,7 @@
                 <hr />
 
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="bio-id" name="bio" placeholder="" value="<?= $bio ?>">
+                    <input type="text" class="form-control" id="bio-id" name="bio" placeholder="" value="<?= htmlspecialchars($bio) ?>">
                     <label for="bio-id">Bio</label>
                 </div>
 
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="localisation-id" name="localisation" placeholder="" value="<?= $localisation ?>">
+                    <input type="text" class="form-control" id="localisation-id" name="localisation" placeholder="" value="<?= htmlspecialchars($localisation) ?>">
                     <label for="localisation-id">Localisation</label>
                 </div>
 

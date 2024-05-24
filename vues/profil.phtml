@@ -75,7 +75,7 @@
                                                 <div class="post-detail">
                                                     <div class="user-info">
                                                         <h5>
-                                                            <a class="profile-link" href="index.php?ctrl=default&action=afficherProfil&id=<?= $shweet->getAuteur()->getId() ?>"><?= $shweet->getAuteur()->getNomUtilisateur() ?></a>
+                                                            <a class="profile-link" href="index.php?ctrl=default&action=afficherProfil&id=<?= $shweet->getAuteur()->getId() ?>"><?= htmlspecialchars($shweet->getAuteur()->getNomUtilisateur()) ?></a>
                                                         </h5>
                                                         <p class="text-muted">Publié le <?= $shweet->getDateCreation()->format('Y-m-d') ?> à <?= $shweet->getDateCreation()->format('H:i:s') ?></p>
                                                     </div>
@@ -104,8 +104,8 @@
                                                         <div id="<?= $enfant->getId() ?>" class="post-comment">
                                                             <img src="<?= $enfant->getAuteur()->getUrlAvatar() ?>" alt="N.D." class="profile-photo-sm">
                                                             <p>
-                                                                <a href="index.php?ctrl=default&action=afficherProfil&id=<?= $enfant->getAuteur()->getId() ?>" class="profile-link"><?= $enfant->getAuteur()->getNomUtilisateur() ?></a>
-                                                                <?= $enfant->getTexte() ?>
+                                                                <a href="index.php?ctrl=default&action=afficherProfil&id=<?= $enfant->getAuteur()->getId() ?>" class="profile-link"><?= htmlspecialchars($enfant->getAuteur()->getNomUtilisateur()) ?></a>
+                                                                <?= htmlspecialchars($enfant->getTexte()) ?>
                                                             </p>
                                                             <?php if (isset($utilisateurConnecte) && $utilisateurConnecte->getId() == $enfant->getAuteurId()) : ?>
                                                                 <form method="post" action="index.php">
